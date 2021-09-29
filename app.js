@@ -13,11 +13,11 @@ const listsRouter = express.Router();
 // POST Create new list
 listsRouter.post('/', async (req, res) => {
   try {
-    const newItem = await List.create(req.body);
+    const newList = await List.create(req.body);
     res.status(201).json({
       status: 'success',
       data: {
-        tour: newItem,
+        list: newList,
       },
     });
   } catch (err) {
@@ -29,6 +29,24 @@ listsRouter.post('/', async (req, res) => {
 });
 
 // GET (Read) Get all list
+listsRouter.get('/', async (req, res) => {
+  try {
+    const allLists = await List.find({});
+    console.log(allLists);
+    res.status(200).json({
+      status: 'success',
+      results: allLists.length,
+      data: {
+        lists: allLists,
+      },
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: 'fail',
+      message: err,
+    });
+  }
+});
 // GET (Read) Get list by id
 // PATCH Update list by id
 // DELETE Delete list by id
