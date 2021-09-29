@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+
+const { Schema } = mongoose;
 
 const listSchema = new Schema({
   createdAt: {
@@ -13,25 +14,9 @@ const listSchema = new Schema({
   title: {
     type: String,
   },
-  items: [
-    {
-      createdAt: {
-        type: Date,
-        default: Date.now(),
-      },
-      body: {
-        type: String,
-        required: [true, 'item body can not be empty'],
-      },
-      isCompleted: {
-        type: Boolean,
-        default: false,
-      },
-      orderInList: {
-        type: Number,
-      },
-    },
-  ],
+  body: {
+    type: String,
+  },
 });
 
 listSchema.pre('save', function (next) {
