@@ -1,5 +1,10 @@
 const express = require('express');
+const logger = require('morgan');
+
 const app = express();
+app.use(logger('dev'));
+
+//Later refactor into separate router
 const List = require('./models/listModel');
 
 const listsRouter = express.Router();
@@ -9,8 +14,6 @@ const listsRouter = express.Router();
 listsRouter.post('/', async (req, res) => {
   try {
     const newItem = await List.create(req.body);
-    console.log(`Created new item: `);
-    console.log(newItem);
     res.status(201).json({
       status: 'success',
       data: {
