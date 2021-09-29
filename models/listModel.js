@@ -13,6 +13,9 @@ const listSchema = new Schema({
   },
   title: {
     type: String,
+    required: [true, 'A list must have a name'],
+    minlength: [5, 'A list name must have more or equal to 5 characters'],
+    maxlength: [40, 'A list name must have less or equal to 40 characters'],
   },
   body: {
     type: String,
