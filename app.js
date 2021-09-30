@@ -1,7 +1,16 @@
 const express = require('express');
 const logger = require('morgan');
+// Implement CORS
+const cors = require('cors');
+const csp = require('express-csp');
+const cspConfig = require('./utils/cspConfig');
 
 const app = express();
+
+// Implement CORS
+app.use(cors());
+app.options('*', cors());
+csp.extend(app, cspConfig);
 
 const listRouter = require('./routes/listRoutes');
 const AppError = require('./utils/AppError');
