@@ -28,12 +28,11 @@ const sendErrorProduction = (err, req, res) => {
 };
 
 module.exports = (err, req, res, next) => {
-  let error = { ...err };
   if (process.env.NODE_ENV === 'development') {
-    if (err.name === 'ValidationError') error = handleValidationErrorDB(error);
     sendErrorDevelopment(err, req, res);
   } else if (process.env.NODE_ENV === 'production') {
+    let error = { ...err };
     if (err.name === 'ValidationError') error = handleValidationErrorDB(error);
-    sendErrorProduction(err, req, res);
+    sendErrorProduction(error, req, res);
   }
 };
