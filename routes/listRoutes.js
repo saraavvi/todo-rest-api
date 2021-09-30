@@ -9,7 +9,9 @@ const router = express.Router();
 router.post(
   '/',
   catchAsync(async (req, res, next) => {
+    console.log(req.body.title);
     const newList = await List.create(req.body);
+    console.log(newList);
     res.status(201).json({
       status: 'success',
       data: {
@@ -35,6 +37,19 @@ router.get(
 );
 
 // GET (Read) Get list by id
+router.get(
+  '/:id',
+  catchAsync(async (req, res, next) => {
+    const { id } = req.params;
+    const list = await List.findById({ id });
+    res.status(200).json({
+      status: 'success',
+      data: {
+        list,
+      },
+    });
+  })
+);
 // PATCH Update list by id
 // DELETE Delete list by id
 

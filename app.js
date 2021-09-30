@@ -9,6 +9,7 @@ const errorHandler = require('./utils/errorHandler');
 
 //Middleware
 app.use(logger('dev'));
+app.use(express.json({ limit: '10kb' }));
 
 //Route handling
 app.use('/api/lists', listRouter);
