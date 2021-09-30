@@ -3,14 +3,6 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const listSchema = new Schema({
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  lastModifiedAt: {
-    type: Date,
-    default: Date.now,
-  },
   title: {
     type: String,
     required: [true, 'A list must have a name'],
@@ -19,6 +11,14 @@ const listSchema = new Schema({
   },
   body: {
     type: String,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+  lastModifiedAt: {
+    type: Date,
+    default: Date.now,
   },
 });
 
