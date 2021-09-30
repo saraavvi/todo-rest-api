@@ -1,6 +1,8 @@
 const express = require('express');
+
 const List = require('../models/listModel');
 const catchAsync = require('../utils/catchAsync');
+const AppError = require('../utils/AppError');
 
 const router = express.Router();
 
@@ -38,8 +40,12 @@ router.get(
 router.get(
   '/:id',
   catchAsync(async (req, res, next) => {
-    const { id } = req.params;
-    const list = await List.findById(id);
+    const list = await List.findById(req.params.id);
+
+    if (!list) {
+      return next(new AppError('No list found with that ID', 404));
+    }
+
     res.status(200).json({
       status: 'success',
       data: {
@@ -48,7 +54,29 @@ router.get(
     });
   })
 );
+
 // PATCH Update list by id
+router.patch(
+  '/:id',
+  catchAsync(async (req, res, next) => {
+    const updatedList = await List.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!updatedList) {
+      return next(new AppError('No list found with that ID', 404));
+    }
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        list: updatedList,
+      },
+    });
+  })
+);
+
 // DELETE Delete list by id
 
 module.exports = router;
