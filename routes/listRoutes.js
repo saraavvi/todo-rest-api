@@ -8,7 +8,7 @@ const router = express.Router();
 // POST Create new list
 router.post(
   '/',
-  catchAsync(async (req, res) => {
+  catchAsync(async (req, res, next) => {
     const newList = await List.create(req.body);
     res.status(201).json({
       status: 'success',
@@ -22,7 +22,7 @@ router.post(
 // GET (Read) Get all list
 router.get(
   '/',
-  catchAsync(async (req, res) => {
+  catchAsync(async (req, res, next) => {
     const allLists = await List.find({});
     res.status(200).json({
       status: 'success',
