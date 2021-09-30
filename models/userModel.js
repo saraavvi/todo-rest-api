@@ -26,11 +26,10 @@ const userSchema = new Schema({
   },
 });
 
-userSchema.pre('save', function (next) {
-  this.lastModifiedAt = Date.now;
-  next();
+userSchema.pre('findOneAndUpdate', function () {
+  this.set({ lastModifiedAt: Date.now() });
 });
 
-const User = mongoose.model('user', userSchema);
+const User = mongoose.model('User', userSchema);
 
 module.exports = User;

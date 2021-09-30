@@ -22,9 +22,8 @@ const listSchema = new Schema({
   },
 });
 
-listSchema.pre('save', function (next) {
-  this.lastModifiedAt = Date.now;
-  next();
+listSchema.pre('findOneAndUpdate', function () {
+  this.set({ lastModifiedAt: Date.now() });
 });
 
 const List = mongoose.model('List', listSchema);
