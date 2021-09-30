@@ -78,5 +78,20 @@ router.patch(
 );
 
 // DELETE Delete list by id
+router.delete(
+  '/:id',
+  catchAsync(async (req, res, next) => {
+    const list = await List.findByIdAndDelete(req.params.id);
+
+    if (!list) {
+      return next(new AppError('No list found with that ID', 404));
+    }
+
+    res.status(204).json({
+      status: 'success',
+      data: null,
+    });
+  })
+);
 
 module.exports = router;
