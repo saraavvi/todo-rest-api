@@ -39,7 +39,7 @@ router.get(
   '/:id',
   catchAsync(async (req, res, next) => {
     const { id } = req.params;
-    const list = await List.findById({ id });
+    const list = await List.findById(id);
     res.status(200).json({
       status: 'success',
       data: {
