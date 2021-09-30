@@ -15,6 +15,7 @@ const app = express();
 const AppError = require('./utils/AppError');
 const errorHandler = require('./utils/errorHandler');
 const listRouter = require('./routes/listRoutes');
+const userRouter = require('./routes/userRoutes');
 
 // Implement Security features
 // Set security HTTP headers
@@ -44,6 +45,7 @@ app.use(express.json({ limit: '10kb' }));
 
 //Route handling
 app.use('/api/lists', listRouter);
+app.use('/api/users', userRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server.`, 404));
