@@ -6,6 +6,7 @@ const hpp = require('hpp');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const rateLimit = require('express-rate-limit');
+const cookieParser = require('cookie-parser');
 // CORS resources
 const cors = require('cors');
 const csp = require('express-csp');
@@ -42,6 +43,7 @@ csp.extend(app, cspConfig);
 //Middleware
 app.use(logger('dev'));
 app.use(express.json({ limit: '10kb' }));
+app.use(cookieParser());
 
 //Route handling
 app.use('/api/lists', listRouter);
