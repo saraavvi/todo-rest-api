@@ -9,9 +9,7 @@ const router = express.Router();
 router.post(
   '/',
   catchAsync(async (req, res, next) => {
-    console.log(req.body.title);
     const newList = await List.create(req.body);
-    console.log(newList);
     res.status(201).json({
       status: 'success',
       data: {
