@@ -13,8 +13,6 @@ exports.createList = catchAsync(async (req, res, next) => {
 });
 
 exports.getAllLists = catchAsync(async (req, res, next) => {
-  console.log('Cookies: ', req.cookies);
-  console.log('Signed Cookies: ', req.signedCookies);
   const allLists = await List.find({});
   res.status(200).json({
     status: 'success',
