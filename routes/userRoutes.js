@@ -21,7 +21,9 @@ const createSendToken = (user, statusCode, req, res) => {
     expires: new Date(
       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
     ),
+    // Flags the cookie to be accessible only by the web server.
     httpOnly: true,
+    // Marks the cookie to be used with HTTPS only.
     secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
   };
 
@@ -47,7 +49,6 @@ router.post(
       email: req.body.email,
       password: req.body.password,
       passwordConfirm: req.body.passwordConfirm,
-      role: req.body.role,
     });
     createSendToken(newUser, 201, req, res);
   })
@@ -62,6 +63,7 @@ router.post(
       return next(new AppError('Please provide email and password', 400));
     }
 
+    //Kollar om användaren verkligen finns samt att lösen är korrekt
     const user = await User.findOne({ email }).select('+password');
     if (!user || !(await user.correctPassword(password, user.password))) {
       return next(new AppError('Incorrect email or password', 401));
