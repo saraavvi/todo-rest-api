@@ -17,3 +17,11 @@ Yesterday we discussed the project and created cards on our trello board. We set
 ### Thursday September 30th - day 3:
 
 Yesterday we implemented morgan as logger and removed console statements. We implemented the get all lists route and refactored the async functions with a catchAsync function in addition to some smaller changes in the code. Today we are going to work separately and then show each other what we have made./BT
+
+### Friday October 1st - day 4:
+
+Yesterday we worked separatly. Björn kept working on the backend while I started on the frontend. I created a React project and a github repo. I created a basic structure for the app:
+* two pages: a landing page and one to display overview of the lists
+* created routes for the pages
+* fetched lists from the backend to display on the list page. 
+/SV 
