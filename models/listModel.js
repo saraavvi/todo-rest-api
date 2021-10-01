@@ -20,6 +20,11 @@ const listSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  user: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User',
+    required: [true, 'Only logged in users can create lists'],
+  },
 });
 
 listSchema.pre('findOneAndUpdate', function () {

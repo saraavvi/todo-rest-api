@@ -1,8 +1,11 @@
 const express = require('express');
 
 const listController = require('../controllers/listController');
+const authController = require('../controllers/authController');
 
 const router = express.Router();
+
+router.use(authController.protect);
 
 // CRUD operations for lists
 router
