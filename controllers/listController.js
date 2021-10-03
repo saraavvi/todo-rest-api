@@ -13,7 +13,7 @@ exports.createList = catchAsync(async (req, res, next) => {
 });
 
 exports.getAllLists = catchAsync(async (req, res, next) => {
-  const allLists = await List.find({});
+  const allLists = await List.find({ user: req.user.id });
   res.status(200).json({
     status: 'success',
     results: allLists.length,
@@ -24,7 +24,7 @@ exports.getAllLists = catchAsync(async (req, res, next) => {
 });
 
 exports.getList = catchAsync(async (req, res, next) => {
-  const list = await List.findById(req.params.id);
+  const list = await List.findOne({ id: req.params.id, user: req.user.id });
 
   if (!list) {
     return next(new AppError('No list found with that ID', 404));
@@ -39,10 +39,21 @@ exports.getList = catchAsync(async (req, res, next) => {
 });
 
 exports.updateList = catchAsync(async (req, res, next) => {
-  const updatedList = await List.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true,
-  });
+  const updates = {};
+  if (req.body.title) {
+    updates.title = req.body.title;
+  }
+  if (req.body.body) {
+    updates.body = req.body.body;
+  }
+  const updatedList = await List.findOneAndUpdate(
+    { id: req.params.id, user: req.user.id },
+    updates,
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
 
   if (!updatedList) {
     return next(new AppError('No list found with that ID', 404));
@@ -57,7 +68,10 @@ exports.updateList = catchAsync(async (req, res, next) => {
 });
 
 exports.deleteList = catchAsync(async (req, res, next) => {
-  const list = await List.findByIdAndDelete(req.params.id);
+  const list = await List.findOneAndDelete({
+    id: req.params.id,
+    user: req.user.id,
+  });
 
   if (!list) {
     return next(new AppError('No list found with that ID', 404));
