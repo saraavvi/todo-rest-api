@@ -25,3 +25,7 @@ Yesterday we worked separatly. Björn kept working on the backend while I starte
 * created routes for the pages
 * fetched lists from the backend to display on the list page. 
 /SV 
+
+### Tuesday October 5th - day 5 
+
+since the last time have been working on CRUD from frontend and some simple layout. I also learned about JWT and bcrypt and how to use it in this application. Today we will be working together to connect sign in/login from the frontend to our backend.
