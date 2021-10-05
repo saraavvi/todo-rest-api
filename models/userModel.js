@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const bcrypt = require('bcryptjs');
 
 const { Schema } = mongoose;
 
@@ -49,15 +50,18 @@ userSchema.pre('findOneAndUpdate', function (next) {
 });
 
 userSchema.pre('save', async function (next) {
+  // Only run this function if password was actually modified
+  if (!this.isModified('password')) return next();
+  this.password = await bcrypt.hash(this.password, 12);
   this.passwordConfirm = undefined;
   next();
 });
 
-userSchema.methods.correctPassword = function (
+userSchema.methods.correctPassword = async function (
   candidatePassword,
   userPassword
 ) {
-  return candidatePassword === userPassword;
+  return await bcrypt.compare(candidatePassword, userPassword);
 };
 
 const User = mongoose.model('User', userSchema);
