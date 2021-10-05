@@ -20,11 +20,15 @@ const listSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  user: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User',
+    required: [true, 'Only logged in users can create lists'],
+  },
 });
 
-listSchema.pre('save', function (next) {
-  this.lastModifiedAt = Date.now;
-  next();
+listSchema.pre('findOneAndUpdate', function () {
+  this.set({ lastModifiedAt: Date.now() });
 });
 
 const List = mongoose.model('List', listSchema);
