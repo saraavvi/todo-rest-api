@@ -3,7 +3,7 @@ const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/AppError');
 
 exports.createList = catchAsync(async (req, res, next) => {
-  const newList = await List.create(req.body);
+  const newList = await List.create({ user: req.user.id, ...req.body });
   res.status(201).json({
     status: 'success',
     data: {
