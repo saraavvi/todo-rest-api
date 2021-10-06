@@ -13,7 +13,9 @@ exports.createList = catchAsync(async (req, res, next) => {
 });
 
 exports.getAllLists = catchAsync(async (req, res, next) => {
-  const allLists = await List.find({ user: req.user.id });
+  const allLists = await List.find({ user: req.user.id }).sort(
+    '-lastModifiedAt'
+  );
   res.status(200).json({
     status: 'success',
     results: allLists.length,
