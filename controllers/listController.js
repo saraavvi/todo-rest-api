@@ -24,7 +24,7 @@ exports.getAllLists = catchAsync(async (req, res, next) => {
 });
 
 exports.getList = catchAsync(async (req, res, next) => {
-  const list = await List.findOne({ id: req.params.id, user: req.user.id });
+  const list = await List.findOne({ _id: req.params.id, user: req.user.id });
 
   if (!list) {
     return next(new AppError('No list found with that ID', 404));
@@ -47,7 +47,7 @@ exports.updateList = catchAsync(async (req, res, next) => {
     updates.body = req.body.body;
   }
   const updatedList = await List.findOneAndUpdate(
-    { id: req.params.id, user: req.user.id },
+    { _id: req.params.id, user: req.user.id },
     updates,
     {
       new: true,
@@ -69,7 +69,7 @@ exports.updateList = catchAsync(async (req, res, next) => {
 
 exports.deleteList = catchAsync(async (req, res, next) => {
   const list = await List.findOneAndDelete({
-    id: req.params.id,
+    _id: req.params.id,
     user: req.user.id,
   });
 
