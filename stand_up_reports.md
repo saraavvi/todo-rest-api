@@ -28,4 +28,8 @@ Yesterday we worked separatly. Björn kept working on the backend while I starte
 
 ### Tuesday October 5th - day 5 
 
-since the last time have been working on CRUD from frontend and some simple layout. I also learned about JWT and bcrypt and how to use it in this application. Today we will be working together to connect sign in/login from the frontend to our backend.
+since the last time I have been working on CRUD from frontend and some simple layout. I also learned about JWT and bcrypt and how to use it in this application. Today we will be working together to connect sign in/login from the frontend to our backend. /SV
+
+### Wednesday October 6th - day 6
+
+Yesterday we finnished user login and register on the frontend. After that I read about markdown and experimented with how to use it in our lists. Today I will try to implement it in the application. /SV
