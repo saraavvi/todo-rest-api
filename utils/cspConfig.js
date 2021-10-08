@@ -46,4 +46,4 @@ const cspConfig = {
   },
 };
 
-export default cspConfig;
+module.exports = cspConfig;
