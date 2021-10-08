@@ -33,3 +33,9 @@ since the last time I have been working on CRUD from frontend and some simple la
 ### Wednesday October 6th - day 6
 
 Yesterday we finnished user login and register on the frontend. After that I read about markdown and experimented with how to use it in our lists. Today I will try to implement it in the application. /SV
+
+### Thursday October 7th - day 7
+
+Yesterday I finnished implementing markdown on the frontend, refactored some code and added some styling. Today I am going to read about testing to figure out how we can use it on the backend. /SV
+
+This afternoon we worked together and started to add tests for our routes, using mocha and supertest. /SV
