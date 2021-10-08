@@ -35,9 +35,11 @@ app.use(xss());
 // Prevent param pollution
 app.use(hpp());
 
-// Implement CORS
+// Implement Cross-Origin Resource Sharing
 app.use(cors());
+// Enable pre-flight across-the-board (OPTIONS)
 app.options('*', cors());
+// Content security policy
 csp.extend(app, cspConfig);
 
 //Middleware
