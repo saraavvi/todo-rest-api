@@ -9,6 +9,8 @@ const rateLimit = require('express-rate-limit');
 const cookieParser = require('cookie-parser');
 // CORS resources
 const cors = require('cors');
+const csp = require('express-csp');
+const cspConfig = require('./utils/cspConfig');
 
 const app = express();
 const AppError = require('./utils/AppError');
@@ -43,6 +45,10 @@ app.use(
     ],
   })
 );
+// Enable pre-flight across-the-board (OPTIONS)
+app.options('*', cors());
+// Content security policy
+csp.extend(app, cspConfig);
 
 //Middleware
 app.use(logger('dev'));
