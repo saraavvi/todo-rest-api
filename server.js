@@ -11,7 +11,7 @@ const database = process.env.DATABASE.replace(
 
 mongoose.connect(database).catch((error) => console.error(error));
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 app.listen(port);
 
 module.exports = app;

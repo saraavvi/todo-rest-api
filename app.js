@@ -9,8 +9,6 @@ const rateLimit = require('express-rate-limit');
 const cookieParser = require('cookie-parser');
 // CORS resources
 const cors = require('cors');
-const csp = require('express-csp');
-const cspConfig = require('./utils/cspConfig');
 
 const app = express();
 const AppError = require('./utils/AppError');
@@ -36,11 +34,15 @@ app.use(xss());
 app.use(hpp());
 
 // Implement Cross-Origin Resource Sharing
-app.use(cors());
-// Enable pre-flight across-the-board (OPTIONS)
-app.options('*', cors());
-// Content security policy
-csp.extend(app, cspConfig);
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "http://127.0.0.1:3000",
+      "https://mern-sara-todo.netlify.app",
+    ],
+  })
+);
 
 //Middleware
 app.use(logger('dev'));
