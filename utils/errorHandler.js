@@ -24,6 +24,7 @@ const sendErrorProduction = (err, req, res) => {
     status: err.status,
     message,
     statusCode,
+    stack: err.stack,
   });
 };
 
