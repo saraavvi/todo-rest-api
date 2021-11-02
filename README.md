@@ -11,6 +11,6 @@ A MERN app.
 
 https://mern-sara-todo.netlify.app/
 
-### Backend repo:
+### Frontend repo:
 
-https://github.com/saraavvi/todo-rest-api
+https://github.com/saraavvi/todo-react-frontend
